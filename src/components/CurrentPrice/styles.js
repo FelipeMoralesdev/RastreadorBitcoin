@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
         width:"100%",
         height:"auto",
         alignItems: "center",
+        marginBottom: 20,
     },
     currentPrice: {
         color:"#f50d41",
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontSize: 16,
         fontWeight: "bold",
-
     },
 });
 
