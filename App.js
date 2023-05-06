@@ -83,8 +83,7 @@ export default function App() {
       />
       <CurrentPrice/>
       <HistoryGraphic/>
-      <QuotationList/>
-      <QuotationsItems/>
+      <QuotationList filterDay={updateDay} listTransactions={coinList}/>
     </SafeAreaView>
   );
 }
