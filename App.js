@@ -22,7 +22,8 @@ function url(qtdDays){
   const start_date = 
   `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
 
-  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`
+  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${}&end=${end_date}`
+
 }
 
 async function getListCoins(url) {
