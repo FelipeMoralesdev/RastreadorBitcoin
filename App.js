@@ -17,12 +17,12 @@ function url(qtdDays){
   const date = new Date();
   const listLastDays = qtdDays
   const end_date = 
-  `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
+  `${date.getFullYear()}${addZero(date.getMonth()+1)}${addZero(date.getDate())}`
   date.setDate(date.getDate() - listLastDays)
   const start_date = 
-  `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDate())}`
+  `${date.getFullYear()}${addZero(date.getMonth()+1)}${addZero(date.getDate())}`
 
-  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${}&end=${end_date}`
+  return `https://economia.awesomeapi.com.br/json/daily/USD-BRL/?start_date=${start_date}&end_date=${end_date}`
 
 }
 
