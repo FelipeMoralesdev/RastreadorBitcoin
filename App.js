@@ -17,27 +17,27 @@ function url(qtdDays){
   const date = new Date();
   const listLastDays = qtdDays
   const end_date = 
-  `${date.getFullYear()}${addZero(date.getMonth()+1)}${addZero(date.getDate())}`
+  `${date.getMonth()}-${addZero(date.getDate()+1)}-${addZero(date.getFullYear())}`
   date.setDate(date.getDate() - listLastDays)
   const start_date = 
-  `${date.getFullYear()}${addZero(date.getMonth()+1)}${addZero(date.getDate())}`
+  `${date.getMonth()}-${addZero(date.getDate()+1)}-${addZero(date.getFullYear())}`
 
-  return `https://economia.awesomeapi.com.br/json/daily/USD-BRL/?start_date=${start_date}&end_date=${end_date}`
+  return `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?@moeda=%27EUR%27&@dataInicial=%27${start_date}%27&@dataFinalCotacao=%27${end_date}%27&$top=100&$format=json&$select=cotacaoVenda,dataHoraCotacao`
 
 }
 
 async function getListCoins(url) {
   let response = await fetch(url);
   let returnApi = await response.json();
-  let selectListQuotations = returnApi.bpi;
-  const queryCoinsList = Object.keys(selectListQuotations.map((key)=>{
-    return{
-      data: key.split("-").reverse.join("/"),
-      valor: selectListQuotations[key]
+  let selectListQuotations = returnApi.value;
+  const queryCoinsList = selectListQuotations.map((item) => {
+    const date = new Date(item.dataHoraCotacao);
+    return {
+      data: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
+      valor: item.cotacaoVenda,
     };
-  }));
-  let data = queryCoinsList.reverse();
-  return data;
+  });
+  return queryCoinsList;
 }
 
 async function getPriceCoinsGraphic(url) {
